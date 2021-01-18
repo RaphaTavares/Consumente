@@ -76,3 +76,17 @@ const writeFile = () =>
     saveAs(blob, fileName + ".txt");
     
     }
+
+
+
+
+
+
+    let text1 = "cdnbujvnbfeujvnbf´vsdefnv´f";
+    let text2 = "cdnbujvnbfeujvnbf´vsdefnv´f";
+
+    function defineHistory(){
+        // sortear número aleatório e colocar um dos dois textos no span com id 'textoHistoria'
+    }
+
+    //atualizar o id cart para adicionar os produtos do carrinho.
