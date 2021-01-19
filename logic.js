@@ -48,7 +48,7 @@ const adiciona = () =>
     total();
 }
 
-const addToCart = (produtoCompleto) =>
+const addToCart = (produtoCompleto, remove=false) =>
 {
     let code = '';
     let tbody = document.getElementById('cart');
@@ -62,7 +62,7 @@ const addToCart = (produtoCompleto) =>
     }
     else
     {
-        if(produto != null && qtd != null && qtd != 0 && produto != '')
+        if(produto != null && qtd != null && qtd != 0 && produto != '' && remove == false)
         {
             produtos.push(produtoCompleto);
             quantidades.push(qtd);    
@@ -79,15 +79,12 @@ const addToCart = (produtoCompleto) =>
     {   
         const regexValor = /R\$ ([0-9]{1,5},[0-9]{2})/;
             const produtoSemPreco = produtos[i].split("-");
-
             let preco = regexValor.exec(produtoSemPreco[1]);
-            console.table(preco);
-            console.table(quantidades);
             let precoQtd = preco[1].replace(',','.') * quantidades[i];
             code += "<tr><td>" + produtoSemPreco[0] + "</td>";
             code += "<td>" + quantidades[i] + "</td>";
             code += "<td>" + precoQtd.toFixed(2) + "</td>";
-            code += "<td>" + "<button class='btn btn-danger' onclick='removeFromCart(\"" + produtoCompleto + "\")'>-</button></td></tr>"
+            code += "<td>" + "<button class='btn btn-danger' onclick='removeFromCart(\"" + produtos[i] + "\")'>-</button></td></tr>"
     }
     
         tbody.innerHTML = code;
@@ -138,7 +135,9 @@ const finalizar = () =>
     }
 
     let jsonPronto = JSON.stringify(compra);
-    console.table(jsonPronto);
+
+    document.getElementById("escondido").value = jsonPronto.toString();
+    document.formzinho.submit();
 
 }
 
@@ -155,9 +154,9 @@ const removeFromCart = (product) =>
       produtos.splice(index, 1);
       quantidades.splice(index, 1);
     }
-    
+
     // array = [2, 9]
     let vazio = '';
-        addToCart(vazio);
+        addToCart(product, remove=true);
 }
     

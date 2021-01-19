@@ -109,7 +109,7 @@
                      </div>
                      <br>
                      <input type="text" id="nomepessoa" placeholder="Qual o seu nome?" style="width: 100%; height: 40px; background: #fff; border:none; border-radius: 10px;">
-                     <a
+                     <button onclick="finalizar()"
                         class="btn "
                         role="button"
                         style="
@@ -128,11 +128,11 @@
                         margin-right: auto;
                         margin-top: 100px;
                         "
-                        href="result.html"
-                        >
-                     Confirmar
-                     </a>
+                        >Confirmar</button>
                   </div>
+                  <form name="formzinho" method="POST" action="processa.php">
+                  <input type="text" id="escondido">
+</form>
                </div>
             </div>
          </div>
