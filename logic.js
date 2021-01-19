@@ -1,7 +1,6 @@
 const produtos = [];
 const quantidades = [];
 const valores = [];
-let valorTotal = 0;
 let compra;
 let date = new Date();
 
@@ -18,57 +17,65 @@ const adiciona = () =>
     document.getElementById("produto").value = "";
     document.getElementById("qtd").value = "";
     console.log(produto);
-    // creating table elements
-    let table = document.getElementById("cart");
+
+
+    console.table(produtos);
+    let code = '';
     
-    let newRow = document.createElement('tr');
-    newRow.setAttribute('id', produto);
-    let newColumn1 = document.createElement('td');
-    let newColumn2 = document.createElement('td');
-    let newColumn3 = document.createElement('td');
-    let newColumn4 = document.createElement('td');
 
-    //separating product from price
-    
-    const arrayPrecoProduto = produto.split("-");
-    const arrayPrecoPuro = arrayPrecoProduto[1].split(" ");
+    for(let i = 0; i < produtos.length; i++)
+    {
+        const regexValor = /R\$ ([0-9]{1,5},[0-9]{2})/;
+            const produtoSemPreco = produtos[i].split("-");
+            let preco = regexValor.exec(produtoSemPreco[1]);
+            
+            let precoQtd = preco[1].replace(',','.') * quantidades[i];
+            console.log("preco: " + preco + "/nprecoQtd: " + precoQtd);
+            code += "<tr><td>" + produtoSemPreco[0] + "</td>";
+            code += "<td>" + quantidades[i] + "</td>";
+            code += "<td>" + precoQtd + "</td>";
+            code += "<td>" + "<button class='btn btn-danger' onclick='removeFromCart(" + produtoSemPreco[0] + "'>-</button></td></tr>"
+        }
+    let tbody = document.getElementById('cart');
+        tbody.innerHTML = code;
 
-
-    let column1Text = document.createTextNode(arrayPrecoProduto[0]);
-    let column2Text = document.createTextNode(qtd);
-    
-    let arrayPrecoPuroPronto = arrayPrecoPuro[2].replace(",", ".");
-    console.log("pronto" + arrayPrecoPuroPronto);
-    let precoTotal = arrayPrecoPuroPronto * qtd;
-    console.table(arrayPrecoPuro);
-    console.table(precoTotal);
-    let column3Text = document.createTextNode(precoTotal);
-    console.log("arrayPrecoPuro: " + arrayPrecoPuro[2] + ", qtd: " + qtd + "preco total: " + precoTotal);
-
-
-    let column4Button = document.createElement('button');
-    let column4Text = document.createTextNode("-");
-    
-    column4Button.appendChild(column4Text);
-
-    column4Button.className += " btn btn-danger";
-    //column4Button.onclick = removeFromCart(document.getElementById(produto));
-    column4Button.setAttribute("onclick","removeFromCart(document.getElementById('" + produto + "').value)");
-
-    newColumn1.appendChild(column1Text);
-    newColumn2.appendChild(column2Text);
-    newColumn3.appendChild(column3Text);
-    
-    newColumn4.appendChild(column4Button);
-
-    newRow.appendChild(newColumn1);
-    newRow.appendChild(newColumn2);
-    newRow.appendChild(newColumn3);
-    newRow.appendChild(newColumn4);
-    table.appendChild(newRow);
     total();
 }
 
+const addToCart = (produtoCompleto) =>
+{
+    let qtd = 1;
+
+    if(produtos.includes(produtoCompleto))
+    {
+        let index = produtos.indexOf(produtoCompleto);
+        quantidades[index]++;
+    }
+    else
+    {
+        produtos.push(produtoCompleto);
+        quantidades.push(qtd);    
+    }
+    
+    let code = '';
+    for(let i = 0; i < produtos.length; i++)
+    {   
+        const regexValor = /R\$ ([0-9]{1,5},[0-9]{2})/;
+            const produtoSemPreco = produtos[i].split("-");
+            let preco = regexValor.exec(produtoSemPreco[1]);
+            
+            let precoQtd = preco[1].replace(',','.') * quantidades[i];
+            console.log("preco: " + preco + "/nprecoQtd: " + precoQtd);
+            code += "<tr><td>" + produtoSemPreco[0] + "</td>";
+            code += "<td>" + quantidades[i] + "</td>";
+            code += "<td>" + precoQtd + "</td>";
+            code += "<td>" + "<button class='btn btn-danger' onclick='removeFromCart(" + produtoSemPreco[0] + "'>-</button></td></tr>"
+    }
+    let tbody = document.getElementById('cart');
+        tbody.innerHTML = code;
+    
+        total();
+}
 /*
 
     var table = document.getElementById("tabela");
@@ -88,6 +95,7 @@ const adiciona = () =>
 */
 const total = () =>
 {
+    let valorTotal = 0;
     const regexValor = /R\$ ([0-9]{1,5},[0-9]{2})/;
 
     for(let i = 0; i < produtos.length; i++)
@@ -98,9 +106,10 @@ const total = () =>
         valores[i] = valores[i].replace(',', '.');
 
         valorTotal += valores[i] * quantidades[i];
+        console.log("valor total: " + valorTotal);
     }
 
-    document.getElementById("total").value = "R$" + valorTotal;
+    document.getElementById("total").innerHTML = "R$" + valorTotal;
 
 }
 
@@ -130,17 +139,9 @@ const finalizar = () =>
     let jsonPronto = JSON.stringify(compra);
     console.table(jsonPronto);
 
-    writeFile();
 }
 
-const writeFile = () =>
-{  
-    let fileName = compra.nome + date.getDate();
 
-    let blob = new Blob([compra], { type: "text/pain,charset=utf-8"});
-    saveAs(blob, fileName + ".txt");
-    
-    }
 
     function defineHistory(){
         // sortear número aleatório e colocar um dos dois textos no span com id 'textoHistoria'
