@@ -107,7 +107,7 @@ const total = () =>
         valorTotal += valores[i] * quantidades[i];
     }
 
-    document.getElementById("total").innerHTML = "R$" + valorTotal;
+    document.getElementById("total").innerHTML = "R$" + valorTotal.toFixed(2);
 
 }
 

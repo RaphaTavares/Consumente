@@ -131,7 +131,7 @@
                         >Confirmar</button>
                   </div>
                   <form name="formzinho" method="POST" action="processa.php">
-                  <input type="text" id="escondido">
+                  <input type="text" id="escondido" name="escondido">
 </form>
                </div>
             </div>
