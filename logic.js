@@ -13,10 +13,8 @@ const adiciona = () => {
     precoo = precoo * qtd;
     let valorzin = total();
     valorzin = parseFloat(valorzin) + parseFloat(precoo);
-    if(valorzin >= 50)
-    {
-        console.log("ultrapassou");
-        return alert("adicionando esse produto seu carrinho ultrapassará o limite de 50 reais")
+    if(valorzin > 50){
+        return alert("ATENÇÃO! Adicionando este produto ao seu carrinho o limite de R$ 50,00 será ultrapassado.")
     }
 
     if (produto != null && qtd != null && qtd != 0) {
@@ -52,13 +50,9 @@ const addToCart = (produtoCompleto, remove = false) => {
     precoo = precoo[1].replace(',','.');
     let valorzin = total();
     valorzin = parseFloat(valorzin) + parseFloat(precoo);
-    console.log("valorzin: " + valorzin);
-    console.log("precoo: " + precoo);
     
-    if(valorzin >= 50)
-    {
-        console.log("ultrapassou");
-        return alert("adicionando esse produto seu carrinho ultrapassará o limite de 50 reais")
+    if(valorzin > 50){
+        return alert("ATENÇÃO! Adicionando este produto ao seu carrinho o limite de R$ 50,00 será ultrapassado.")
     }
     let code = '';
     let tbody = document.getElementById('cart');
@@ -112,6 +106,16 @@ const finalizar = () => {
         }
         objProdutos.push(produtojson);
     }
+
+    if(document.getElementById("nomepessoa").value == ""){
+         alert("ATENÇÃO! O campo nome é obrigatório");
+         return;
+    }
+    if(!Array.isArray(objProdutos) ||  !objProdutos.length){
+        alert("ATENÇÃO! É necessário comprar ao menos um produto");
+         return;
+    }
+
     compra = {
         'nome': document.getElementById("nomepessoa").value,
         'data': date.getDate() + "/" + date.getMonth() + 1 + "/" + date.getFullYear(),
@@ -138,7 +142,6 @@ const removeFromCart = (product) => {
         produtos.splice(index, 1);
         quantidades.splice(index, 1);
     }
-    // array = [2, 9]
     let vazio = '';
     addToCart(product, remove = true);
 }

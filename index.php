@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>Simulador de Compras - Consumente</title>
-    <meta name="description" content="Aplicação desenvolvida para o Trabalho 1 de Matemática Discreta" />
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
@@ -111,7 +110,7 @@
                             </tfoot>
                         </table>
                     </div>
-                    <input type="text" id="nomepessoa" placeholder="Qual o seu nome?" style="margin-left:5%; width: 60%; height: 40px; background: #fff; border: #85d997 solid 3px; border-radius: 10px; padding:2px 6px;" required="true">
+                    <input type="text" id="nomepessoa" placeholder="Qual o seu nome?" style="margin-left:5%; width: 60%; height: 40px; background: #fff; border: #85d997 solid 3px; border-radius: 10px; padding:2px 6px;" required="true" required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" data-dismiss="modal" style="background-color: #ff5351; color:#fff;">Adicionar mais produtos</button>
