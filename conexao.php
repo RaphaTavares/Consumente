@@ -1,5 +1,5 @@
 <?php
-$servidor = "localhost";
+$servidor = "mysql742.umbler.com";
 $usuario = "consumente";
 $senha = "consumente1234";
 $dbname = "consumente";
