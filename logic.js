@@ -6,6 +6,19 @@ let date = new Date();
 const adiciona = () => {
     let produto = document.getElementById("produto").value;
     let qtd = document.getElementById("qtd").value;
+
+    const regexValor = /R\$ ([0-9]{1,5},[0-9]{2})/;
+    let precoo = regexValor.exec(produto);
+    precoo = precoo[1].replace(',','.');
+    precoo = precoo * qtd;
+    let valorzin = total();
+    valorzin = parseFloat(valorzin) + parseFloat(precoo);
+    if(valorzin >= 50)
+    {
+        console.log("ultrapassou");
+        return alert("adicionando esse produto seu carrinho ultrapassará o limite de 50 reais")
+    }
+
     if (produto != null && qtd != null && qtd != 0) {
         if (produtos.includes(produto)) {
             let index = produtos.indexOf(produto);
@@ -33,6 +46,20 @@ const adiciona = () => {
     total();
 }
 const addToCart = (produtoCompleto, remove = false) => {
+
+    const regexValor = /R\$ ([0-9]{1,5},[0-9]{2})/;
+    let precoo = regexValor.exec(produtoCompleto);
+    precoo = precoo[1].replace(',','.');
+    let valorzin = total();
+    valorzin = parseFloat(valorzin) + parseFloat(precoo);
+    console.log("valorzin: " + valorzin);
+    console.log("precoo: " + precoo);
+    
+    if(valorzin >= 50)
+    {
+        console.log("ultrapassou");
+        return alert("adicionando esse produto seu carrinho ultrapassará o limite de 50 reais")
+    }
     let code = '';
     let tbody = document.getElementById('cart');
     let qtd = 1;
@@ -51,7 +78,7 @@ const addToCart = (produtoCompleto, remove = false) => {
         return;
     }
     for (let i = 0; i < produtos.length; i++) {
-        const regexValor = /R\$ ([0-9]{1,5},[0-9]{2})/;
+        
         const produtoSemPreco = produtos[i].split("-");
         let preco = regexValor.exec(produtoSemPreco[1]);
         let precoQtd = preco[1].replace(',', '.') * quantidades[i];
@@ -61,7 +88,7 @@ const addToCart = (produtoCompleto, remove = false) => {
         code += "<td class='text-center'>" + "<button class='btn btn-danger' style='width:50%; margin:auto;' onclick='removeFromCart(\"" + produtos[i] + "\")'>-</button></td></tr>"
     }
     tbody.innerHTML = code;
-    total();
+    let retornoTotal = total();
 }
 const total = () => {
     let valorTotal = 0;
@@ -73,6 +100,8 @@ const total = () => {
         valorTotal += valores[i] * quantidades[i];
     }
     document.getElementById("total").innerHTML = "R$" + valorTotal.toFixed(2);
+
+    return valorTotal;
 }
 const finalizar = () => {
     let objProdutos = [];
