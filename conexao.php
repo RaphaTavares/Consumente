@@ -1,19 +1,14 @@
 <?php
-
 $servidor = "localhost";
-$usuario = "root";
-$senha = "";
+$usuario = "consumente";
+$senha = "consumente1234";
 $dbname = "consumente";
 
-$conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
-
-    if(!$conn)
-    {
-        die("Falha na conexao: " . mysqli_connect_error());
-    }
-    else
-    {
-        //echo "conexao realizada com sucesso";
-    }
+try{
+    $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
+}
+catch(Exception $e){
+    echo $e->getMessage();
+}
 
 ?>

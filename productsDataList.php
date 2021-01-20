@@ -46,7 +46,7 @@
 <option value="Macarrão Espaguete Paganini 500g - R$ 8,99">
 <option value="Macarrão Penne Paganini 500g - R$ 8,99">
 <option value="Macarrão Penne Paganini Integral 500g - R$ 9,99">
-<option value="Pão Francês 1kg - R$ 13,59">
+<option value="Pão Francês 1un - R$ 0,59">
 <option value="Pão de Forma Wickbold 300g - R$ 9,99">
 <option value="Pão de Batata Milani 300g - R$ 6,99">
 <option value="Agua Mineral Sem Gas Minalba 510ml - R$ 1,99">
